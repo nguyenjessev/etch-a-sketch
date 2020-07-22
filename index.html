@@ -55,7 +55,7 @@
             function buildGrid(x, y) {
                 const container = document.querySelector('#container');
                 container.textContent = '';
-                container.style['grid-template'] = `repeat(${x}, 1fr) / repeat(${y}, 1fr)`;
+                container.style['grid-template'] = `repeat(${y}, 1fr) / repeat(${x}, 1fr)`;
 
                 for (let i = 0; i < x; i++) {
                     for (let k = 0; k < y; k++) {
