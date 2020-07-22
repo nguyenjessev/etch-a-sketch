@@ -4,15 +4,29 @@
         <link href="normalize.css" type="stylesheet" />
 
         <style>
+            body {
+                text-align: center;
+                background: hsl(240, 20%, 40%);
+            }
+
             #container {
                 display: grid;
-                grid-template: repeat(16, 1fr) / repeat(16, 1fr);
-                width: 960px;
-                height: 960px;
-                background: hsl(45, 20%, 80%);
+                width: 640px;
+                height: 640px;
+                background: hsl(45, 50%, 70%);
                 margin: 0 auto;
                 padding: 10px;
-                border-radius: 1%;
+                box-shadow: ;
+            }
+
+            .cell {
+                background: white;
+                box-shadow: 0 0 0 1px hsl(0, 0%, 90%);
+            }
+
+            .filled {
+                background: black;
+                border: none;
             }
         </style>
     </head>
@@ -21,9 +35,37 @@
         <div id="container">
 
         </div>
+        <button type='button' id='clear'>CLEAR</button>
 
         <script>
+            function buildGrid(x, y) {
+                const container = document.querySelector('#container');
+                container.textContent = '';
+                container.style['grid-template'] = `repeat(${x}, 1fr) / repeat(${y}, 1fr)`;
 
+                for (let i = 0; i < x; i++) {
+                    for (let k = 0; k < y; k++) {
+                        const cell = document.createElement('div');
+                        cell.classList.add('cell');
+                        cell.addEventListener('mouseover', e => {
+                            e.target.classList.add('filled');
+                        })
+                        container.appendChild(cell);
+                    }
+                }
+            }
+
+            function clearGrid() {
+                const cells = document.querySelectorAll('.cell');
+                cells.forEach(cell => {
+                    cell.classList.remove('filled');
+                });
+            }
+
+            buildGrid(16, 16);
+
+            const clearButton = document.querySelector('#clear');
+            clearButton.addEventListener('click', clearGrid);
         </script>
     </body>
 </html>
