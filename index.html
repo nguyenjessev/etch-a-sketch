@@ -7,6 +7,7 @@
             body {
                 text-align: center;
                 background: hsl(240, 20%, 40%);
+                color: white;
             }
 
             #container {
@@ -28,6 +29,10 @@
                 background: black;
                 border: none;
             }
+
+            .userDim {
+                width: 48px;
+            }
         </style>
     </head>
     
@@ -35,10 +40,14 @@
         <div id="container">
 
         </div>
-        <button type='button' id='clear'>CLEAR</button>
+        <button type='button' id='clear'>CLEAR GRID</button>
 
-        <input type='number' id='xDim' />
-        <input type='number' id='ydim' />
+        <label for='xDim'>Columns:
+            <input name='xDim' type='number' id='xDim' class='userDim' value=16 />
+        </label>
+        <label for='yDim'>Rows:
+            <input name='yDim' type='number' id='yDim' class='userDim' value=16 />
+        </label>
 
         <button type='button' id='createGrid'>CREATE NEW GRID</button>
 
@@ -67,10 +76,25 @@
                 });
             }
 
+            function createNewGrid() {
+                const x = parseInt(document.querySelector('#xDim').value);
+                const y = parseInt(document.querySelector('#yDim').value);
+
+                if (!Number.isInteger(x) || !Number.isInteger(y)) {
+                    alert('Please enter valid column and row values!');
+                    return;
+                }
+
+                buildGrid(x, y);
+            }
+
             buildGrid(16, 16);
 
             const clearButton = document.querySelector('#clear');
             clearButton.addEventListener('click', clearGrid);
+
+            const createGridButton = document.querySelector('#createGrid');
+            createGridButton.addEventListener('click', createNewGrid);
         </script>
     </body>
 </html>
